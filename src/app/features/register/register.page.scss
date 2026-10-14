@@ -1,0 +1,75 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.tips ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.preview {
+  margin: 0;
+
+  img {
+    width: 100%;
+    max-height: 50vh;
+    object-fit: contain;
+    border-radius: var(--databee-radius);
+    background: var(--ion-color-light);
+  }
+
+  figcaption {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--ion-color-medium);
+    text-align: center;
+  }
+}
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  height: 200px;
+  font-size: 3rem;
+  border: 2px dashed var(--ion-color-medium-tint);
+  border-radius: var(--databee-radius);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+
+  ion-spinner {
+    align-self: center;
+  }
+}
+
+.summary {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 12px;
+  font-size: 0.9rem;
+
+  dt {
+    color: var(--ion-color-medium);
+  }
+
+  dd {
+    margin: 0;
+  }
+}
