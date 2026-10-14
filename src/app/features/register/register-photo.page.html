@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Novo registro · Foto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-preview-banner />
+
+  <div class="ion-padding stack">
+    <section class="tips">
+      <h2>Dicas para uma boa foto</h2>
+      <ul>
+        <li>Aproxime-se sem tocar ou capturar a abelha.</li>
+        <li>Boa luz, foco nítido e a abelha ocupando boa parte da imagem.</li>
+        <li>Se possível, mostre a lateral do corpo e as asas.</li>
+      </ul>
+    </section>
+
+    @if (draft.photo(); as photo) {
+      <figure class="preview">
+        <img [src]="photo.previewUrl" alt="Prévia da foto selecionada" />
+        <figcaption>
+          {{ photo.source === 'camera' ? 'Câmera' : 'Galeria' }} · {{ photo.width }}×{{ photo.height }} ·
+          {{ (photo.bytes / 1024).toFixed(0) }} KB
+        </figcaption>
+      </figure>
+    } @else {
+      <div class="placeholder" aria-hidden="true">📷</div>
+    }
+
+    @if (errorMessage(); as message) {
+      <ion-text color="danger" role="alert">
+        <p>{{ message }}</p>
+      </ion-text>
+    }
+
+    <div class="actions">
+      <ion-button expand="block" (click)="pick('camera')" [disabled]="busy()">
+        <ion-icon slot="start" name="camera" />
+        {{ draft.hasPhoto() ? 'Tirar outra' : 'Tirar foto' }}
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="pick('gallery')" [disabled]="busy()">
+        <ion-icon slot="start" name="image" />
+        Escolher da galeria
+      </ion-button>
+      @if (busy()) {
+        <ion-spinner name="crescent" />
+      }
+    </div>
+
+    @if (draft.hasPhoto()) {
+      <div class="actions">
+        <ion-button expand="block" color="secondary" (click)="next()">
+          Continuar
+          <ion-icon slot="end" name="arrow-forward" />
+        </ion-button>
+        <ion-button expand="block" fill="clear" color="danger" (click)="discard()">
+          <ion-icon slot="start" name="trash-outline" />
+          Descartar foto
+        </ion-button>
+      </div>
+    }
+  </div>
+</ion-content>
