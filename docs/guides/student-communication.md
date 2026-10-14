@@ -49,3 +49,5 @@ Sugiro a IMP-xxx porque …
 
 ## No Notion
 Ao concluir uma task, além do registro técnico, escreva na página a seção **"🎓 Explicação para a equipe"**: resumo em uma frase (callout), conceitos novos explicados, o que acontece "por baixo", arquivos principais, como testar e **perguntas do checkpoint com respostas** em toggles (`<details>`). Exemplos prontos: IMP-006, IMP-007, IMP-008, IMP-009 e IMP-018.
+
+Ao fim de um marco (gate ou semana), consolide tudo numa página-filha do Guia de execução, como a [Explicação do setup inicial](https://app.notion.com/p/3f9d3425eae4812b81ffc11a375d32b5): visão geral com diagrama, tabela do que ficou pronto, conceitos, "o que acontece por baixo", segurança, como testar, o que depende da equipe e perguntas com respostas. Linke a página no Guia ("Comece por aqui") e nas tasks envolvidas.

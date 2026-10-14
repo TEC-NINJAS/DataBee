@@ -13,6 +13,7 @@ Repositório oficial: https://github.com/TEC-NINJAS/DataBee
 |---|---|
 | Página raiz do projeto (avaliação técnica e plano) | https://app.notion.com/p/2d5d3425eae482d5aa0f0102b42db87e |
 | Guia de execução (comece por aqui no Notion) | https://app.notion.com/p/0dfd3425eae482429f1b810626c44b39 |
+| Explicação do setup inicial (para alunos; tudo que foi construído até 14/10) | https://app.notion.com/p/3f9d3425eae4812b81ffc11a375d32b5 |
 | **Implementation Tasks** (IMP-001…070) | https://app.notion.com/p/018d3425eae483fa850f81c645fd0180 · data source `collection://e25d3425-eae4-82ac-bbc6-87a55de41da5` |
 | Project Decisions (D01–D25) | https://app.notion.com/p/4abd3425eae4829aa4e80171975fe704 |
 | MVP Locked Scope (Core/Stretch/OUT) | https://app.notion.com/p/ce1d3425eae4825287e081adb73842d5 |
@@ -97,7 +98,7 @@ Detalhes e modelos em `docs/guides/student-communication.md`.
 1. `npm run check` passa sem erros/warnings novos; fluxo testado no navegador; APK gerado se a task tocar Android.
 2. Commits feitos, PR aberto e **merge em `main` concluído** (§8); `main` local atualizado.
 3. `docs/HANDOFF.md` atualizado (estado, próximos passos, pendências).
-4. No Notion, na página da task: seção **"🤖 Registro do agente — data"** (arquivos, comandos, verificado/não verificado) e seção **"🎓 Explicação para a equipe"** (conceitos e processo explicados para iniciantes, com perguntas do checkpoint e respostas em toggles). Status → `Review` (o código já está em `main`). `Done` quando a equipe confirmar que testou e entendeu (ou pedir explicitamente para concluir); depois marque como `Ready` as tasks que ficaram desbloqueadas.
+4. No Notion, na página da task: seção **"🤖 Registro do agente — data"** (arquivos, comandos, verificado/não verificado) e seção **"🎓 Explicação para a equipe"** (conceitos e processo explicados para iniciantes, com perguntas do checkpoint e respostas em toggles). Ao fechar um marco (gate/semana), crie uma página-filha do Guia de execução no mesmo estilo de "Explicação do setup inicial", consolidando tudo o que foi feito. Status → `Review` (o código já está em `main`). `Done` quando a equipe confirmar que testou e entendeu (ou pedir explicitamente para concluir); depois marque como `Ready` as tasks que ficaram desbloqueadas.
 5. Relate aos alunos no formato do §6.
 
 ## 10. Comandos
