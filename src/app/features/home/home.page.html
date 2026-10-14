@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>DataBee</ion-title>
+    @if (auth.isAuthenticated()) {
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()" aria-label="Sair">
+          <ion-icon slot="icon-only" name="log-out-outline" />
+        </ion-button>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-preview-banner />
+
+  <section class="hero ion-padding">
+    <h1>Olá{{ auth.displayName() ? ', ' + auth.displayName() : '' }}! 🐝</h1>
+    <p>Encontrou uma abelha? Fotografe e registre sua observação.</p>
+    <ion-button routerLink="/tabs/registrar" expand="block" size="large">
+      <ion-icon slot="start" name="camera" />
+      Registrar abelha
+    </ion-button>
+  </section>
+
+  <ion-card>
+    <ion-card-content>
+      <h2>Suas contribuições</h2>
+      <p class="count">
+        <strong>{{ savedCount }}</strong>
+        observações salvas
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <section class="ion-padding-horizontal">
+    <h2>Conquistas</h2>
+    <ul class="achievements">
+      @for (item of achievements; track item.id) {
+        <li class="locked">
+          <span class="emoji" aria-hidden="true">{{ item.emoji }}</span>
+          <div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.rule }}</p>
+          </div>
+          <ion-icon name="lock-closed" aria-label="Bloqueada" />
+        </li>
+      }
+    </ul>
+  </section>
+</ion-content>
