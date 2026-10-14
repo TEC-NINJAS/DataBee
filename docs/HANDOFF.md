@@ -45,5 +45,6 @@ Node 24.19, npm 11.17, Git 2.56, VS Code 1.141, Microsoft OpenJDK 21.0.12 (`C:\P
 - Avisos `npm warn allow-scripts` (lmdb, msgpackr-extract, @parcel/watcher) são esperados e inofensivos.
 
 ## Última sessão
+2026-10-14 (3ª parte) — Claude: fluxo Git otimizado — agente faz PR **e merge** em `main` após check verde e autorrevisão (AGENTS.md §8, workflow §2–3, Notion Git Workflow). PR #1 (foundation) mesclado.
 2026-10-14 (2ª parte) — Claude: explicações didáticas no Notion e Done em IMP-006/007/008/009/018 (autorizado pela equipe); IMP-010 → Ready; D13/IMP-005 com o repo oficial; AGENTS.md reescrito com autonomia e comunicação; Git Workflow do Notion migrado para Conventional Commits; foundation commitada.
 2026-10-14 (1ª parte) — Claude: setup do ambiente (JDK 21, Android Studio), scaffold do app, serviços core, 8 rotas, guias para agentes, handoff; Notion atualizado: Review = IMP-006/007/008/009/018; In progress = IMP-012/016/017/019/020/070; Blocked = IMP-011 (chave); notas em IMP-010/033/034; matriz de versões preenchida em "Documentação oficial e checklist". Verificação: `npm run check`, navegador (modo pré-visualização), APK debug compilado. Não verificado: Supabase real, Android real, GPS real.

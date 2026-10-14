@@ -13,10 +13,10 @@ Conflito entre repo e Notion: pare e pergunte; não "corrija" decisão humana.
 1. **Agente** escolhe a task (Ready/In progress com dependências Done), lê a página inteira no Notion e conta aos alunos o plano em linguagem simples. Status da task → `In progress`.
 2. **Agente**: `git switch main && git pull --ff-only` → `git switch -c feat/imp-xxx-slug`.
 3. **Agente** implementa só a task, roda `npm run check`, testa no navegador (e gera APK se tocar Android), commita (§3) e faz push da branch.
-4. **Agente** registra no Notion (seções "🤖 Registro do agente" e "🎓 Explicação para a equipe"), atualiza `docs/HANDOFF.md`, Status `Review`, e relata aos alunos (formato em `student-communication.md`).
-5. **Alunos** testam (navegador/celular) seguindo os passos dados e conseguem explicar entrada → processamento → saída. Pedem ajuda ao agente se algo não ficou claro.
-6. **Agente** abre PR para `main` (template `.github/pull_request_template.md`); humano (aluno/orientadora) aprova o merge.
-7. Com o aceite humano: Status `Done` e as tasks dependentes que ficaram liberadas → `Ready`.
+4. **Agente** atualiza `docs/HANDOFF.md`, faz a autorrevisão (§6), abre o PR (template `.github/pull_request_template.md`) e **faz o merge em `main` ele mesmo** (rebase), apaga a branch e atualiza o `main` local. Check falhando ou dúvida de produto = sem merge, PR fica aberto com explicação.
+5. **Agente** registra no Notion (seções "🤖 Registro do agente" e "🎓 Explicação para a equipe"), Status `Review`, e relata aos alunos (formato em `student-communication.md`).
+6. **Alunos** testam (navegador/celular) seguindo os passos dados e conseguem explicar entrada → processamento → saída. Pedem ajuda ao agente se algo não ficou claro; correções viram nova branch `fix/...`.
+7. Com a confirmação da equipe: Status `Done` e as tasks dependentes que ficaram liberadas → `Ready`.
 
 ## 3. Git — Conventional Commits
 - Branches: `feat/imp-019-camera`, `fix/imp-022-upload-retry`, `docs/...`, `chore/...`, `build/...`.
@@ -32,6 +32,14 @@ Refs: IMP-019
 - Escopos usuais: `auth`, `register`, `observations`, `feed`, `ai`, `catalog`, `supabase`, `android`, `ui`, `deps`, `docs`, `agents`.
 - Mudança que quebra compatibilidade: `feat(api)!: ...` + rodapé `BREAKING CHANGE: ...`.
 - Commits pequenos, um assunto por commit, `git add <arquivos específicos>`; revisar `git diff --staged` (segredos!) antes.
+- PR e merge (feitos pelo agente):
+```bash
+git push -u origin feat/imp-019-camera
+gh pr create --base main --fill            # título = Conventional Commit; corpo segue o template
+gh pr merge --rebase --delete-branch       # histórico linear; só com npm run check verde
+git switch main && git pull --ff-only
+```
+  Sem `gh` logado: crie/mescle pelo REST da GitHub API (`POST /repos/TEC-NINJAS/DataBee/pulls` e `PUT .../pulls/<n>/merge` com `merge_method: rebase`) usando o token da credencial do Git (`git credential fill`), sem nunca imprimir o token.
 - `main` sempre executável. Proibido: `push --force`, `reset --hard`, `clean -fd`, resolver conflito com ours/theirs em massa.
 - Nunca commitar: `node_modules/`, `www/`, `android/app/build/`, `supabase.config.ts`, `.env*`, APKs.
 
