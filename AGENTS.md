@@ -39,7 +39,7 @@ Sem acesso ao Notion (ex.: agente sem MCP do Notion): use o `docs/HANDOFF.md` e 
 ## 4. Autonomia — o que você faz sem pedir permissão
 Os alunos têm pouca experiência técnica: **você executa** e depois **explica**. Pode e deve, sem pedir:
 - instalar dependências do projeto, rodar `npm start`, `npm run check`, build, `npm run android:sync`, gerar APK (`cd android && ./gradlew assembleDebug`), abrir o Android Studio;
-- criar branch, implementar a task, testar no navegador, **commitar automaticamente** (conta Git logada) seguindo §8, fazer `push` da branch;
+- criar branch, implementar a task, testar no navegador, **commitar automaticamente** (conta Git logada) seguindo §8, fazer `push`, abrir o PR **e fazer o merge em `main` você mesmo** quando os critérios de §8 forem cumpridos;
 - aplicar migrations e fazer deploy de Edge Functions **se a CLI já estiver vinculada** (`npm run supabase -- projects list` funciona) — sempre com `--dry-run` antes e explicando o que muda;
 - atualizar `docs/HANDOFF.md` e registrar a execução na task do Notion (§9);
 - quando algo não estiver definido mas for técnico (estrutura de código, componente, padrão de estado, layout de uma tela dentro do tema), **decida** usando práticas modernas e explique a escolha.
@@ -48,7 +48,7 @@ Os alunos têm pouca experiência técnica: **você executa** e depois **explica
 - for decisão de produto/escopo/ciência que não está no Notion (nova tela, nova regra, mudar decisão Dxx, texto científico/educativo);
 - o design pedir algo além do tema existente (identidade visual nova, ilustrações, fluxo diferente dos wireframes D25) — ofereça 2–3 opções curtas com sua recomendação;
 - precisar de dados/acessos: publishable key, contas de teste, login da Supabase CLI, aparelho conectado, aprovação de custo (OpenAI/D15);
-- a ação for destrutiva ou externa: merge em `main`, apagar dados remotos, mudar configurações de conta.
+- a ação for destrutiva ou externa: apagar dados remotos, reescrever histórico, mudar configurações de conta.
 Segredos (secret key, `service_role`, `OPENAI_API_KEY`, senhas): **nunca peça para colarem no chat**. Guie o aluno para inserir direto no Dashboard ou num comando no terminal dele.
 
 ## 5. Stack e regras invioláveis
@@ -86,13 +86,18 @@ Detalhes e modelos em `docs/guides/student-communication.md`.
   Tipos: `feat` (funcionalidade), `fix` (correção), `docs`, `style` (formatação), `refactor`, `perf`, `test`, `build` (dependências/build), `ci`, `chore` (manutenção). Escopos: `auth`, `register`, `observations`, `feed`, `ai`, `supabase`, `android`, `ui`, `deps`, `docs`.
   Ex.: `feat(register): add camera capture with EXIF-free reencode` · `Refs: IMP-019`.
 - Commits pequenos e coerentes; `git add` de arquivos específicos; revise `git diff --staged` buscando segredos antes de cada commit.
-- Commit e push da branch são automáticos; ao concluir a task abra PR para `main` (`gh` se disponível) e **peça a aprovação de um humano para o merge**.
+- Commit, push, PR e **merge são feitos pelo agente** (fluxo otimizado para produção, autorizado pela equipe em 14/10/2026). Antes do merge, obrigatório:
+  1. `npm run check` passa na branch, atualizada com `main` (`git pull --rebase origin main` se `main` andou; resolva conflitos entendendo as duas mudanças);
+  2. autorrevisão do diff (`git diff main...HEAD`) com o prompt de revisão de `docs/guides/workflow.md` §6 — corrija o que encontrar;
+  3. nenhum segredo no diff; `docs/HANDOFF.md` atualizado.
+- PR: `gh pr create --base main --fill` (ou API do GitHub, ver `docs/guides/workflow.md` §3). Merge: `gh pr merge --rebase --delete-branch` (mantém o histórico Conventional Commits linear). Depois: `git switch main && git pull --ff-only`.
+- Se o check falhar ou houver dúvida de produto/escopo, **não faça merge**: deixe o PR aberto e explique aos alunos o motivo.
 
 ## 9. Ao concluir uma task (Definition of Done do agente)
 1. `npm run check` passa sem erros/warnings novos; fluxo testado no navegador; APK gerado se a task tocar Android.
-2. Commits feitos (§8) e branch enviada.
+2. Commits feitos, PR aberto e **merge em `main` concluído** (§8); `main` local atualizado.
 3. `docs/HANDOFF.md` atualizado (estado, próximos passos, pendências).
-4. No Notion, na página da task: seção **"🤖 Registro do agente — data"** (arquivos, comandos, verificado/não verificado) e seção **"🎓 Explicação para a equipe"** (conceitos e processo explicados para iniciantes, com perguntas do checkpoint e respostas em toggles). Status → `Review`. `Done` só quando a equipe/orientadora confirmar (teste humano + explicação); depois marque como `Ready` as tasks que ficaram desbloqueadas.
+4. No Notion, na página da task: seção **"🤖 Registro do agente — data"** (arquivos, comandos, verificado/não verificado) e seção **"🎓 Explicação para a equipe"** (conceitos e processo explicados para iniciantes, com perguntas do checkpoint e respostas em toggles). Status → `Review` (o código já está em `main`). `Done` quando a equipe confirmar que testou e entendeu (ou pedir explicitamente para concluir); depois marque como `Ready` as tasks que ficaram desbloqueadas.
 5. Relate aos alunos no formato do §6.
 
 ## 10. Comandos
