@@ -1,0 +1,30 @@
+// Tema DataBee. Use sempre as cores Ionic (color="primary" etc.) e variáveis CSS; não use hex soltos nas páginas.
+// https://ionicframework.com/docs/theming/colors
+
+:root {
+  // Mel / âmbar — cor da marca
+  --ion-color-primary: #e8a317;
+  --ion-color-primary-rgb: 232, 163, 23;
+  --ion-color-primary-contrast: #1f1400;
+  --ion-color-primary-contrast-rgb: 31, 20, 0;
+  --ion-color-primary-shade: #cc8f14;
+  --ion-color-primary-tint: #eaac2e;
+
+  // Marrom escuro — contraste/ações secundárias
+  --ion-color-secondary: #4a3520;
+  --ion-color-secondary-rgb: 74, 53, 32;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #412f1c;
+  --ion-color-secondary-tint: #5c4936;
+
+  // Verde folha — sucesso/natureza
+  --ion-color-success: #2e8540;
+  --ion-color-success-rgb: 46, 133, 64;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #287538;
+  --ion-color-success-tint: #439153;
+
+  --databee-radius: 14px;
+}

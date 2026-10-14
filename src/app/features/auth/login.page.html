@@ -1,0 +1,79 @@
+<ion-content>
+  <app-preview-banner />
+
+  <main class="login">
+    <header class="brand">
+      <div class="logo" aria-hidden="true">🐝</div>
+      <h1>DataBee</h1>
+      <p>Registre abelhas, aprenda e contribua com a ciência cidadã.</p>
+    </header>
+
+    <ion-segment [value]="mode()" (ionChange)="setMode($event.detail.value)">
+      <ion-segment-button value="signin">
+        <ion-label>Entrar</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="signup">
+        <ion-label>Criar conta</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      @if (mode() === 'signup') {
+        <ion-input
+          formControlName="displayName"
+          label="Nome ou apelido"
+          labelPlacement="floating"
+          fill="outline"
+          maxlength="80"
+          autocomplete="nickname"
+          helperText="Aparece no feed. Pode ser um pseudônimo."
+        />
+      }
+      <ion-input
+        formControlName="email"
+        type="email"
+        label="E-mail"
+        labelPlacement="floating"
+        fill="outline"
+        autocomplete="email"
+        inputmode="email"
+        errorText="Informe um e-mail válido."
+      />
+      <ion-input
+        formControlName="password"
+        type="password"
+        label="Senha"
+        labelPlacement="floating"
+        fill="outline"
+        [autocomplete]="mode() === 'signin' ? 'current-password' : 'new-password'"
+        errorText="Mínimo de 8 caracteres."
+      />
+
+      @if (errorMessage(); as message) {
+        <ion-text color="danger" role="alert">
+          <p>{{ message }}</p>
+        </ion-text>
+      }
+      @if (infoMessage(); as message) {
+        <ion-text color="success" role="status">
+          <p>{{ message }}</p>
+        </ion-text>
+      }
+
+      <ion-button type="submit" expand="block" [disabled]="busy() || auth.previewMode()">
+        @if (busy()) {
+          <ion-spinner name="crescent" />
+        } @else {
+          {{ mode() === 'signin' ? 'Entrar' : 'Criar conta' }}
+        }
+      </ion-button>
+    </form>
+
+    @if (auth.previewMode()) {
+      <ion-button expand="block" fill="outline" (click)="explorePreview()">
+        Explorar telas (pré-visualização)
+      </ion-button>
+      <ion-note>Sem Supabase configurado não há login nem dados reais.</ion-note>
+    }
+  </main>
+</ion-content>
