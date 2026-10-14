@@ -1,0 +1,67 @@
+{
+  "name": "databee",
+  "version": "0.0.1",
+  "author": "TEC_NINJAS",
+  "scripts": {
+    "ensure-env": "node scripts/ensure-env.mjs",
+    "prestart": "npm run ensure-env",
+    "start": "ng serve",
+    "prebuild": "npm run ensure-env",
+    "build": "ng build",
+    "build:dev": "npm run ensure-env && ng build --configuration development",
+    "watch": "ng build --watch --configuration development",
+    "lint": "ng lint",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\" \"supabase/**/*.{ts,sql}\"",
+    "check": "npm run lint && npm run build",
+    "android:sync": "npm run build && npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:run": "npm run build && npx cap run android",
+    "supabase": "supabase",
+    "start:lan": "ng serve --host 0.0.0.0",
+    "prestart:lan": "npm run ensure-env"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "22.2.2",
+    "@angular/compiler": "22.2.2",
+    "@angular/core": "22.2.2",
+    "@angular/forms": "22.2.2",
+    "@angular/platform-browser": "22.2.2",
+    "@angular/router": "22.2.2",
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/camera": "8.2.5",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/geolocation": "8.2.3",
+    "@capacitor/haptics": "8.0.2",
+    "@capacitor/keyboard": "8.0.6",
+    "@capacitor/status-bar": "8.0.4",
+    "@ionic/angular": "^9.0.0",
+    "@supabase/supabase-js": "2.117.3",
+    "ionicons": "^8.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.2",
+    "@angular/cli": "22.2.2",
+    "@angular/compiler-cli": "22.2.2",
+    "@angular/language-service": "22.2.2",
+    "@capacitor/cli": "8.5.3",
+    "@ionic/angular-toolkit": "^13.0.0",
+    "angular-eslint": "22.5.0",
+    "eslint": "^10.10.0",
+    "prettier": "3.9.10",
+    "supabase": "2.121.0",
+    "typescript": "~6.0.0",
+    "typescript-eslint": "^8.61.0"
+  },
+  "description": "DataBee — ciência cidadã para registro e identificação assistida de abelhas (FLL BIOGLOW)",
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "supabase@2.121.0": true
+  }
+}
