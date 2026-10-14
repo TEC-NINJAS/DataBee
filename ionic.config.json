@@ -1,0 +1,7 @@
+{
+  "name": "databee",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

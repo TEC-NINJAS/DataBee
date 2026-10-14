@@ -1,0 +1,5 @@
+android/
+www/
+node_modules/
+.angular/
+supabase/.temp/
