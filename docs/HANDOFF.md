@@ -2,9 +2,10 @@
 
 > **Obrigatório:** todo agente ou pessoa que alterar o projeto atualiza este arquivo ao final (protocolo em `docs/guides/workflow.md` §4). Mantenha curto e atual; apague o que ficou velho.
 
-**Atualizado em:** 2026-10-14 · **Por:** Claude (Claude Code) · **Semana:** 2 (14–16/10) · **Próximo gate:** Gate 1 (IMP-047) atrasado → Gate 2 (IMP-038)
+**Atualizado em:** 2026-10-15 · **Por:** Codex · **Semana:** 2 (14–16/10) · **Próximo gate:** Gate 1 (IMP-047) atrasado → Gate 2 (IMP-038)
 
 ## Estado atual (o que funciona agora)
+- IMP-020 (15/10): tela Dados esclarece que salvar ainda não foi implementado, com ou sem GPS. Botão de recusa = "Não usar localização"; confirmação acessível mantém a foto na prévia e não simula salvamento. Foto só em memória, perdida ao fechar/recarregar. Verificado: `npm run check` e navegador Chrome isolado em 390/360 px (galeria, recusa no app, permissão negada pelo navegador, sem erros de execução/rolagem horizontal). Android real e novo APK não verificados nesta sessão.
 - App Ionic 9.0.8 + Angular 22.2.2 (standalone, signals, zoneless) + Capacitor 8 na raiz do repo. `npm run check` (lint + build) passa sem warnings; `npm audit --omit=dev` = 0 vulnerabilidades; cópia limpa dos arquivos versionados faz `npm ci` + build — verificado em 2026-10-14.
 - `npm start` → http://localhost:4200. Sem chave Supabase roda em **modo pré-visualização** (aviso amarelo, login/salvar desabilitados). Verificado no navegador: navegação nas abas, Início, login, Registrar → galeria → preview (reencode 3000×2000 PNG → 2048×1365 JPEG 27 KB) → Dados → recusar localização. Sem erros no console.
 - Código pronto (aguardando chave/validação humana):
@@ -45,6 +46,7 @@ Node 24.19, npm 11.17, Git 2.56, VS Code 1.141, Microsoft OpenJDK 21.0.12 (`C:\P
 - Avisos `npm warn allow-scripts` (lmdb, msgpackr-extract, @parcel/watcher) são esperados e inofensivos.
 
 ## Última sessão
+2026-10-15 — Codex: corrigida a comunicação da tela Dados após relato de bloqueio sem GPS. Causa: botão Salvar intencionalmente desativado até IMP-022/035, independentemente do consentimento. Alterado `register-details.page.html` (avisos de prévia/salvamento, recusa e confirmação). Verificado: `npm run check`, navegador (foto preservada após recusa/erro de permissão, 360/390 px), `git diff --check`. Nenhuma regra de GPS ou persistência alterada. Sem acesso ao Notion para registrar na IMP-020; equipe deve colar os critérios de IMP-022/035 antes de implementar salvamento. Android real permanece pendente.
 2026-10-14 (4ª parte) — Claude: criada no Notion a página "📘 Explicação do setup inicial" (https://app.notion.com/p/3f9d3425eae4812b81ffc11a375d32b5), linkada no Guia de execução e nas IMP-006/007/008/009/018; AGENTS.md e student-communication.md passam a pedir uma página consolidada por marco.
 2026-10-14 (3ª parte) — Claude: fluxo Git otimizado — agente faz PR **e merge** em `main` após check verde e autorrevisão (AGENTS.md §8, workflow §2–3, Notion Git Workflow). PR #1 (foundation) mesclado.
 2026-10-14 (2ª parte) — Claude: explicações didáticas no Notion e Done em IMP-006/007/008/009/018 (autorizado pela equipe); IMP-010 → Ready; D13/IMP-005 com o repo oficial; AGENTS.md reescrito com autonomia e comunicação; Git Workflow do Notion migrado para Conventional Commits; foundation commitada.
