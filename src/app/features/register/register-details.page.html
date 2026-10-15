@@ -27,6 +27,17 @@
 
       <ion-card>
         <ion-card-content>
+          <h2>Prévia do registro</h2>
+          <p>
+            O salvamento ainda está em desenvolvimento, com ou sem localização. Por enquanto, você pode testar
+            a foto e escolher se deseja incluir o GPS. Nenhuma observação foi salva.
+          </p>
+          <p>A foto fica apenas na memória do app e será perdida ao fechar ou recarregar.</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content>
           <h2>Localização (opcional)</h2>
           <p>
             Usamos o GPS para registrar onde a abelha foi vista. As coordenadas exatas ficam
@@ -48,14 +59,14 @@
                   Permitir e obter localização
                 </ion-button>
                 <ion-button expand="block" fill="outline" (click)="declineLocation()">
-                  Continuar sem localização
+                  Não usar localização
                 </ion-button>
               </div>
             }
             @case ('declined') {
-              <p>
-                <strong>Sem localização.</strong>
-                O registro continua válido.
+              <p role="status">
+                <strong>Localização dispensada.</strong>
+                A foto continua nesta prévia, sem coordenadas. Você pode mudar essa escolha abaixo.
               </p>
               <ion-button fill="clear" (click)="allowLocation()">Mudei de ideia: obter localização</ion-button>
             }
@@ -86,7 +97,7 @@
                 <div class="actions">
                   <ion-button expand="block" (click)="allowLocation()">Tentar novamente</ion-button>
                   <ion-button expand="block" fill="outline" (click)="declineLocation()">
-                    Continuar sem localização
+                    Não usar localização
                   </ion-button>
                 </div>
               }
@@ -97,11 +108,14 @@
 
       <div class="actions">
         <!-- TODO(IMP-022/IMP-035): upload privado + draft → saved/private/idle. Botão fica desabilitado até lá. -->
-        <ion-button expand="block" color="secondary" [disabled]="true">
+        <ion-button expand="block" color="secondary" [disabled]="true" aria-describedby="save-unavailable">
           <ion-icon slot="start" name="save-outline" />
           Salvar observação
         </ion-button>
-        <ion-note>Salvamento será habilitado nas tasks IMP-022 e IMP-035 (upload e draft).</ion-note>
+        <ion-note id="save-unavailable">
+          Salvar ainda não está disponível, mesmo com GPS. A localização é opcional e não impede o salvamento
+          quando essa função estiver pronta.
+        </ion-note>
       </div>
     </div>
   }
