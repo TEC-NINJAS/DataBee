@@ -1,6 +1,6 @@
 # Guia — Supabase (Auth, Postgres + RLS, Storage, Edge Functions)
 
-Projeto hospedado: ref `bupyzsifhsqbwgxtendy`, região `sa-east-1`, plano Free (D13). Usamos o **projeto remoto** (sem Docker). CLI como devDependency: `npm run supabase -- <comando>`.
+Projeto hospedado adotado no recomeço autorizado em 15/10/2026: `DataBee`, ref `uqfuuahziwgxwjymtwil`, região `ca-central-1` (Canadá Central), organização `TEC-NINJAS's Org`, plano Free conforme o painel mostrado pela equipe. Atualização de D13 no Notion pendente; login da CLI e vínculo ainda não concluídos. Usamos o **projeto remoto** (sem Docker). CLI como devDependency: `npm run supabase -- <comando>`.
 
 ## 1. Chaves — quem pode ver o quê
 | Valor | Onde fica | Público? |
@@ -13,9 +13,14 @@ Projeto hospedado: ref `bupyzsifhsqbwgxtendy`, região `sa-east-1`, plano Free (
 
 ## 2. Vincular a CLI (uma vez por máquina — humano)
 ```bash
-npm run supabase -- login                      # abre o navegador; token fica no PC, não no repo
-npm run supabase -- link --project-ref bupyzsifhsqbwgxtendy
+npm.cmd run supabase -- login --agent no --output-format text  # PowerShell: login interativo do responsável
+npm.cmd run supabase -- projects list                       # conferir a referência no Dashboard
+npm.cmd run supabase -- link --project-ref uqfuuahziwgxwjymtwil
 ```
+
+O código de verificação mostrado no navegador é preenchido somente no terminal que iniciou o login. Nunca registrar token/código/senha em chat, Git ou Notion. As opções do login evitam `Cannot prompt for input in JSON output mode` em terminais abertos pelo agente. Login no Dashboard não autentica automaticamente a CLI. Em outros shells, `npm` também pode ser usado.
+
+IMP-012 prepara CLI/configuração/procedimento; não exige migration vazia. A primeira migration de tabelas pertence à IMP-013; profiles continuam na IMP-032. Criar tabelas depende dos critérios completos da task correspondente.
 
 ## 3. Migrations (única forma de mudar o schema)
 ```bash

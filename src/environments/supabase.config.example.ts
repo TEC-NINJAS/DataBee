@@ -6,6 +6,6 @@
 // NUNCA coloque secret key (sb_secret_...), service_role, senha do banco ou OPENAI_API_KEY.
 // Com publishableKey vazia o app abre em "modo pré-visualização" (sem login nem dados).
 export const supabaseConfig = {
-  url: 'https://bupyzsifhsqbwgxtendy.supabase.co',
+  url: 'https://uqfuuahziwgxwjymtwil.supabase.co',
   publishableKey: '',
 };

@@ -28,11 +28,16 @@ O `npm start` cria `src/environments/supabase.config.ts` (ignorado pelo Git) a p
 Avisos `npm warn allow-scripts` sobre `lmdb`, `msgpackr-extract` e `@parcel/watcher` são esperados: o npm 11 não executa scripts de instalação não aprovados; esses pacotes usam binários pré-compilados e o build funciona. `esbuild` e `supabase` já estão aprovados em `package.json → allowScripts`.
 
 ## 3. Conectar ao Supabase (adulto responsável / IMP-010/011)
-1. Dashboard do projeto `DataBee` (ref `bupyzsifhsqbwgxtendy`) → Project Settings → API Keys → copie a **Publishable key** (`sb_publishable_...`).
+Projeto adotado para o recomeço em 15/10/2026: `DataBee`, ref `uqfuuahziwgxwjymtwil`, organização `TEC-NINJAS's Org`, região Canadá Central (`ca-central-1`), plano Free conforme as imagens do painel enviadas pela equipe. O acesso ao projeto anteriormente registrado em São Paulo não foi localizado. A troca foi autorizada nesta conversa; atualizar D13 no Notion ainda está pendente.
+
+1. [Dashboard do DataBee](https://supabase.com/dashboard/project/uqfuuahziwgxwjymtwil) → Project Settings → API Keys → copie a **Publishable key** (`sb_publishable_...`).
 2. Cole em `src/environments/supabase.config.ts` → `publishableKey`. **Nunca** a secret key.
 3. Reinicie `npm start`. O aviso amarelo some e o login passa a funcionar.
 4. Authentication → URL Configuration: adicionar `http://localhost:4200` às Redirect URLs (confirmação de e-mail em dev).
-5. CLI (para migrations/functions): `npm run supabase -- login` e `npm run supabase -- link --project-ref bupyzsifhsqbwgxtendy`.
+5. CLI (ferramenta de terminal para migrations/functions): o responsável executa `npm.cmd run supabase -- login --agent no --output-format text` no PowerShell. Pressione Enter para abrir o navegador, entre na conta que acessa o projeto e preencha o código de verificação somente no terminal. O agente confere `npm.cmd run supabase -- projects list` e então executa `npm.cmd run supabase -- link --project-ref uqfuuahziwgxwjymtwil`.
+6. Em Authentication → Users, crie duas contas de teste distintas (A/B), com e-mails controlados e confirmação administrativa para o teste inicial. Guarde as credenciais em meio privado. Registre no Notion somente existência, responsável, data e revisão.
+
+No PowerShell, `npm.cmd` evita o bloqueio de execução de `npm.ps1`. As opções `--agent no --output-format text` permitem as perguntas do login quando o terminal foi aberto pelo agente. Se aparecer `Verification code is required`, confira se o terminal ainda aguarda o código; se voltou ao início da linha (`PS ...>`), execute o login novamente e siga o novo fluxo no navegador. Acesso ao painel no navegador e login da CLI são autorizações separadas.
 
 ## 4. Android
 1. Abra o Android Studio uma vez e conclua o assistente (Standard) — ele baixa o SDK em `%LOCALAPPDATA%\Android\Sdk`. Em SDK Manager confirme **Android 16 (API 36)**, Build-Tools e Platform-Tools.
