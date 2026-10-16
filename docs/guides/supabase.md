@@ -1,6 +1,6 @@
 # Guia — Supabase (Auth, Postgres + RLS, Storage, Edge Functions)
 
-Projeto hospedado adotado no recomeço autorizado em 15/10/2026: `DataBee`, ref `uqfuuahziwgxwjymtwil`, região `ca-central-1` (Canadá Central), organização `TEC-NINJAS's Org`, plano Free conforme o painel mostrado pela equipe. Atualização de D13 no Notion pendente; login da CLI e vínculo ainda não concluídos. Usamos o **projeto remoto** (sem Docker). CLI como devDependency: `npm run supabase -- <comando>`.
+Projeto hospedado adotado no recomeço autorizado em 15/10/2026: `DataBee`, ref `uqfuuahziwgxwjymtwil`, região `ca-central-1` (Canadá Central), organização `TEC-NINJAS's Org`, plano Free conforme o painel mostrado pela equipe. Atualização de D13 no Notion pendente; **login da CLI e vínculo concluídos e conferidos em 16/10** (`projects list` com `linked: true`). Usamos o **projeto remoto** (sem Docker). CLI como devDependency: `npm run supabase -- <comando>`.
 
 ## 1. Chaves — quem pode ver o quê
 | Valor | Onde fica | Público? |
@@ -22,7 +22,7 @@ O código de verificação mostrado no navegador é preenchido somente no termin
 
 No Windows com Avast, use o comando do projeto (`npm.cmd run supabase -- ...`). Ele passa por `scripts/supabase.mjs`: o Node lê os certificados públicos já confiáveis no Windows e prepara um arquivo temporário para a CLI, que usa Bun. O processo filho recebe `SSL_CERT_FILE` e, se ainda ausente, `NODE_EXTRA_CA_CERTS`; o arquivo é removido ao terminar. Uma configuração explícita de `SSL_CERT_FILE` é preservada. Outros sistemas seguem com o executável oficial sem essa adaptação. Nenhuma validação TLS é desativada, nenhum certificado é instalado e nenhuma variável permanente do Windows é alterada.
 
-Diagnóstico de 16/10: uma consulta pública a `https://api.supabase.com/v1/projects`, sem credenciais, falhou com `UNABLE_TO_VERIFY_LEAF_SIGNATURE` no Node padrão e recebeu HTTP 401 com as CAs do Windows. O 401 é esperado para essa consulta sem autenticação e confirma que a conexão segura chegou ao servidor. O erro `Transport error` relatado no login é compatível com esse problema; a conclusão do login da CLI ainda precisa ser verificada pelo responsável.
+Diagnóstico de 16/10: uma consulta pública a `https://api.supabase.com/v1/projects`, sem credenciais, falhou com `UNABLE_TO_VERIFY_LEAF_SIGNATURE` no Node padrão e recebeu HTTP 401 com as CAs do Windows. O 401 é esperado para essa consulta sem autenticação e confirma que a conexão segura chegou ao servidor. Após o ajuste, a equipe concluiu o login e o agente confirmou a listagem/vínculo do projeto. Evidência em `docs/verification/2026-10-16-imp-012-cli.md`.
 
 Referências: [CAs do sistema no Node](https://nodejs.org/api/tls.html#tlsgetcacertificatestype) e [SSL_CERT_FILE no Bun](https://bun.com/docs/runtime/environment-variables#configuring-bun). Ao relatar erros de login, omita a URL que contém o código temporário; use um novo fluxo de login depois de uma falha.
 
