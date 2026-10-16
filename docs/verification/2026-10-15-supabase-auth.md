@@ -18,7 +18,9 @@ Projeto dev adotado pela equipe: DataBee, referência `uqfuuahziwgxwjymtwil`, or
 | Na tela Início, usar Sair | Voltar ao login | Equipe confirmou o roteiro de saída e troca de conta | Pass — relato humano |
 | Entrar com a conta rotulada B | Abrir Início | Equipe respondeu "Deu certo também" após o roteiro | Pass — relato humano |
 | `npm.cmd run check` após preencher a chave pública | Lint e build de produção sem erros/warnings | Ambos passaram | Pass — agente, antes dos testes humanos |
-| `npm.cmd run supabase -- projects list` | Listar projetos para conferir a referência | `AccessTokenRequiredError` | Fail — autenticação administrativa da CLI pendente |
+| Consulta inicial `npm.cmd run supabase -- projects list`, antes do login administrativo | Listar projetos para conferir a referência | `AccessTokenRequiredError` | Fail naquele momento — resolvido na etapa seguinte |
+| Login administrativo com ajuste de certificados, em 16/10 | Autorizar a CLI | Equipe confirmou mensagem de sucesso; agente conseguiu listar os projetos | Pass — relato humano e conferência do agente |
+| Vínculo da CLI ao DataBee e nova listagem | Referência correta com `linked: true` | Referência local correta e `linked: true` no projeto esperado | Pass — agente; detalhes no registro da IMP-012 |
 
 ## O que acontece por baixo
 
@@ -26,7 +28,7 @@ Projeto dev adotado pela equipe: DataBee, referência `uqfuuahziwgxwjymtwil`, or
 
 A tentativa administrativa teve `Transport error`. Consulta pública, sem credenciais, à API mostrou falha de certificado (`UNABLE_TO_VERIFY_LEAF_SIGNATURE`) no Node padrão; com as CAs confiáveis do Windows, houve HTTP 401, esperado sem autenticação. Isso identifica um problema local de confiança de certificados compatível com o erro informado; não prova que o login da CLI foi concluído.
 
-`scripts/supabase.mjs` agora prepara as CAs do Windows para o executável da CLI. Sintaxe, versão, ajuda, propagação de erro e remoção do temporário passaram; `npm.cmd run check` passou novamente após essa mudança de código. Uma nova tentativa interativa foi aberta, com sucesso final ainda pendente de confirmação. URLs/códigos temporários do login não fazem parte desta evidência.
+`scripts/supabase.mjs` agora prepara as CAs do Windows para o executável da CLI. Sintaxe, versão, ajuda, propagação de erro e remoção do temporário passaram; `npm.cmd run check` passou novamente após essa mudança de código. O reteste interativo teve sucesso confirmado pela equipe; o agente depois listou os projetos e vinculou o DataBee esperado. URLs/códigos temporários do login não fazem parte desta evidência. Ver `docs/verification/2026-10-16-imp-012-cli.md`.
 
 ### Fluxo do app
 
@@ -34,7 +36,7 @@ E-mail e senha digitados no app → Supabase Auth confere a conta → o app rece
 
 Sair encerra a sessão desta instalação e volta ao login. Sessão é a autorização temporária de quem já entrou, como uma pulseira de acesso. O código usa saída local; um token já emitido pode valer até expirar, conforme a limitação prevista na IMP-034. Este teste confirmou a navegação observada, sem medir a expiração do token.
 
-Entrar no app e entrar na ferramenta de administração são acessos separados. A ferramenta do terminal ainda precisa do login da conta que administra o projeto para que o agente confira a referência e faça o vínculo.
+Entrar no app e entrar na ferramenta de administração são acessos separados. O login administrativo foi concluído na etapa seguinte; o agente então conferiu a referência e fez o vínculo do projeto.
 
 ## Limites e pendências
 
@@ -42,7 +44,7 @@ Cadastro pelo app, confirmação por e-mail, Redirect URLs, restauração ao rea
 
 Trocar A/B no login não comprova isolamento de registros/fotos. A matriz A/B/anônimo depende das tabelas e permissões das tasks correspondentes; nenhuma tabela/policy foi criada pelo agente nesta etapa.
 
-IMP-010 ainda requer identificação do responsável por acessos/custos, evidência no Notion, revisão por pessoa e checkpoint oral. IMP-012 ainda requer login/vínculo reais da CLI e sua revisão. Critérios completos de IMP-016/033/034 não foram fornecidos nesta conversa; este registro não declara essas tasks concluídas.
+IMP-010 ainda requer identificação do responsável por acessos/custos, evidência no Notion, revisão por pessoa e checkpoint oral. IMP-012 já teve login/vínculo reais verificados; registro/revisão e checkpoint no Notion continuam pendentes. Critérios completos de IMP-016/033/034 não foram fornecidos nesta conversa; este registro não declara essas tasks concluídas.
 
 ## Checkpoint para a equipe
 
