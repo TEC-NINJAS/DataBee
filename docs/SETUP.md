@@ -39,6 +39,8 @@ Projeto adotado para o recomeço em 15/10/2026: `DataBee`, ref `uqfuuahziwgxwjym
 
 No PowerShell, `npm.cmd` evita o bloqueio de execução de `npm.ps1`. As opções `--agent no --output-format text` permitem as perguntas do login quando o terminal foi aberto pelo agente. Se aparecer `Verification code is required`, confira se o terminal ainda aguarda o código; se voltou ao início da linha (`PS ...>`), execute o login novamente e siga o novo fluxo no navegador. Acesso ao painel no navegador e login da CLI são autorizações separadas.
 
+Se o login retornar `Transport error`, o comando `npm.cmd run supabase -- ...` já inclui a adaptação dos certificados confiáveis do Windows para este PC com Avast (`scripts/supabase.mjs`). Ela usa somente certificados públicos do próprio sistema e um arquivo temporário, removido ao encerrar a ferramenta. Continue usando o comando do projeto para receber essa adaptação; detalhes e diagnóstico em `docs/guides/supabase.md` §2. Depois de uma tentativa com erro, inicie um novo login e use o novo código temporário somente no terminal.
+
 ## 4. Android
 1. Abra o Android Studio uma vez e conclua o assistente (Standard) — ele baixa o SDK em `%LOCALAPPDATA%\Android\Sdk`. Em SDK Manager confirme **Android 16 (API 36)**, Build-Tools e Platform-Tools.
 2. Variáveis de ambiente (Configurações do Windows → Variáveis de ambiente do usuário):

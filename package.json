@@ -16,7 +16,7 @@
     "android:sync": "npm run build && npx cap sync android",
     "android:open": "npx cap open android",
     "android:run": "npm run build && npx cap run android",
-    "supabase": "supabase",
+    "supabase": "node scripts/supabase.mjs",
     "start:lan": "ng serve --host 0.0.0.0",
     "prestart:lan": "npm run ensure-env"
   },

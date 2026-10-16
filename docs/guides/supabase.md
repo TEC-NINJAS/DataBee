@@ -20,6 +20,12 @@ npm.cmd run supabase -- link --project-ref uqfuuahziwgxwjymtwil
 
 O código de verificação mostrado no navegador é preenchido somente no terminal que iniciou o login. Nunca registrar token/código/senha em chat, Git ou Notion. As opções do login evitam `Cannot prompt for input in JSON output mode` em terminais abertos pelo agente. Login no Dashboard não autentica automaticamente a CLI. Em outros shells, `npm` também pode ser usado.
 
+No Windows com Avast, use o comando do projeto (`npm.cmd run supabase -- ...`). Ele passa por `scripts/supabase.mjs`: o Node lê os certificados públicos já confiáveis no Windows e prepara um arquivo temporário para a CLI, que usa Bun. O processo filho recebe `SSL_CERT_FILE` e, se ainda ausente, `NODE_EXTRA_CA_CERTS`; o arquivo é removido ao terminar. Uma configuração explícita de `SSL_CERT_FILE` é preservada. Outros sistemas seguem com o executável oficial sem essa adaptação. Nenhuma validação TLS é desativada, nenhum certificado é instalado e nenhuma variável permanente do Windows é alterada.
+
+Diagnóstico de 16/10: uma consulta pública a `https://api.supabase.com/v1/projects`, sem credenciais, falhou com `UNABLE_TO_VERIFY_LEAF_SIGNATURE` no Node padrão e recebeu HTTP 401 com as CAs do Windows. O 401 é esperado para essa consulta sem autenticação e confirma que a conexão segura chegou ao servidor. O erro `Transport error` relatado no login é compatível com esse problema; a conclusão do login da CLI ainda precisa ser verificada pelo responsável.
+
+Referências: [CAs do sistema no Node](https://nodejs.org/api/tls.html#tlsgetcacertificatestype) e [SSL_CERT_FILE no Bun](https://bun.com/docs/runtime/environment-variables#configuring-bun). Ao relatar erros de login, omita a URL que contém o código temporário; use um novo fluxo de login depois de uma falha.
+
 IMP-012 prepara CLI/configuração/procedimento; não exige migration vazia. A primeira migration de tabelas pertence à IMP-013; profiles continuam na IMP-032. Criar tabelas depende dos critérios completos da task correspondente.
 
 ## 3. Migrations (única forma de mudar o schema)
