@@ -22,6 +22,14 @@ Projeto dev adotado pela equipe: DataBee, referência `uqfuuahziwgxwjymtwil`, or
 
 ## O que acontece por baixo
 
+### Atualização de 16/10 — conexão da ferramenta do terminal
+
+A tentativa administrativa teve `Transport error`. Consulta pública, sem credenciais, à API mostrou falha de certificado (`UNABLE_TO_VERIFY_LEAF_SIGNATURE`) no Node padrão; com as CAs confiáveis do Windows, houve HTTP 401, esperado sem autenticação. Isso identifica um problema local de confiança de certificados compatível com o erro informado; não prova que o login da CLI foi concluído.
+
+`scripts/supabase.mjs` agora prepara as CAs do Windows para o executável da CLI. Sintaxe, versão, ajuda, propagação de erro e remoção do temporário passaram; `npm.cmd run check` passou novamente após essa mudança de código. Uma nova tentativa interativa foi aberta, com sucesso final ainda pendente de confirmação. URLs/códigos temporários do login não fazem parte desta evidência.
+
+### Fluxo do app
+
 E-mail e senha digitados no app → Supabase Auth confere a conta → o app recebe a autorização do usuário e abre Início. As contas ficam no Auth do projeto. A chave pública identifica o app; ela não substitui a senha do usuário. A configuração local fica fora do Git, e nenhuma credencial foi incluída neste registro.
 
 Sair encerra a sessão desta instalação e volta ao login. Sessão é a autorização temporária de quem já entrou, como uma pulseira de acesso. O código usa saída local; um token já emitido pode valer até expirar, conforme a limitação prevista na IMP-034. Este teste confirmou a navegação observada, sem medir a expiração do token.
